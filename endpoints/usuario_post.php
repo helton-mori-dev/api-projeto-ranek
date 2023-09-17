@@ -2,7 +2,7 @@
 
 function api_usuario_post($request) {
   $email = sanitize_email($request['email']);
-  $senha = sanitize_text_field($request['senha']);
+  $senha = $request['senha'];
   $nome = sanitize_text_field($request['nome']);
   $rua = sanitize_text_field($request['rua']);
   $cep = sanitize_text_field($request['cep']);
