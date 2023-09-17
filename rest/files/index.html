@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envio de arquivos</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <input type="file" multiple>
+    <br>
+    <button>Enviar</button>
+</body>
+<script>
+    const input = document.querySelector('input')
+    const button = document.querySelector('button')
+    button.addEventListener('click', handleClick)
+    const options = {
+        headers: {
+
+            "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vcmFuZWthcGlsb2NhbC5sb2NhbCIsImlhdCI6MTY5NDMxNDc0NywibmJmIjoxNjk0MzE0NzQ3LCJleHAiOjE2OTQ0MDExNDcsImRhdGEiOnsidXNlciI6eyJpZCI6IjIifX19.sCqycjRvKAVEi3q7EpqKGO_KJRJxkAallE6W-ecYPLg"
+        }
+    }
+
+    function handleClick() {
+        // console.log(input.files)
+        const files = input.files
+        const form = new FormData()
+
+        for (let i = 0; i < files.length; i++) {
+            form.append(files[i].name, files[i])
+        }
+
+        form.append("nome", "Notebook apple")
+        form.append("descricao", "Usado 3")
+        form.append("preco", "3300")
+        axios.post('http://ranekapilocal.local/wp-json/api/produto', form, options)
+    }
+</script>
+
+</html>
